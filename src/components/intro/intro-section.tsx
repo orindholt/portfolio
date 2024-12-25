@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import Contributions from "../github/contributions";
+import SocialList from "../social-list";
 
 const IntroSection = ({
 	className,
@@ -13,15 +14,16 @@ const IntroSection = ({
 			)}
 			{...props}
 		>
-			<div>
+			<div className="space-y-4">
 				<h2 className="text-xl sm:text-2xl font-extralight text-primary-400">
 					Fullstack Web Developer
 				</h2>
-				<h1 className="text-5xl sm:text-6xl xl:text-7xl font-bold uppercase gap-6 !leading-none">
+				<h1 className="text-4xl sm:text-6xl xl:text-7xl font-bold uppercase gap-6 !leading-none">
 					Oliver Rindholt
 				</h1>
 			</div>
 			<Contributions />
+			<SocialList />
 		</div>
 	);
 };

@@ -27,6 +27,7 @@ const Tooltip = <T extends React.ElementType = "div">({
 		const rect = element.getBoundingClientRect();
 		const x = rect.left + rect.width / 2 + window.scrollX;
 		const y = rect.top - rect.height * 2 + window.scrollY;
+
 		setCoords({
 			x,
 			y,
@@ -58,7 +59,7 @@ const Tooltip = <T extends React.ElementType = "div">({
 				<AnimatePresence>
 					{hovered && (
 						<motion.aside
-							className="absolute w-max"
+							className="absolute w-max pointer-events-none"
 							style={{
 								left: coords.x,
 								top: coords.y,

@@ -25,14 +25,14 @@ const Project = <T extends React.ElementType>({
 				<h3 className="font-bold text-lg leading-none normal-case">{title}</h3>{" "}
 				<ul className="flex flex-wrap gap-2">
 					{tags.map(
-						({ name, standaloneColor, svg }) =>
+						({ name, color, svg }) =>
 							name && (
 								<Tooltip text={name} key={name}>
 									<svg
 										className="fill-white lg:hover:fill-[var(--skill-color)] size-6"
 										style={
 											{
-												"--skill-color": standaloneColor,
+												"--skill-color": color,
 											} as React.CSSProperties
 										}
 										viewBox={svg.viewBox}

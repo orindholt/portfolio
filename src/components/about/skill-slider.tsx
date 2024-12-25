@@ -2,9 +2,10 @@
 
 import { SKILLS } from "@/lib/constants";
 import { cn, hexToHSL } from "@/lib/utils";
-import { useMemo, useState } from "react";
+import { useInView } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { Autoplay } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 
 const SkillSlider = ({
 	className,
@@ -12,14 +13,36 @@ const SkillSlider = ({
 }: React.HTMLAttributes<HTMLDivElement>) => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 
-	const skills = useMemo(() => Object.values(SKILLS), []);
+	const containerRef = useRef<HTMLDivElement>(null);
+	const sliderRef = useRef<SwiperRef>(null);
+
+	const isInView = useInView(containerRef);
+
+	useEffect(() => {
+		const swiper = sliderRef.current?.swiper;
+
+		if (isInView) {
+			swiper?.autoplay?.start();
+		} else {
+			swiper?.autoplay?.stop();
+		}
+
+		return () => {
+			swiper?.autoplay?.stop();
+		};
+	}, [isInView]);
 
 	return (
-		<div className={cn("w-full fade-out-x", className)} {...props}>
+		<div
+			ref={containerRef}
+			className={cn("w-full fade-out-x", className)}
+			{...props}
+		>
 			<Swiper
 				autoplay={{
 					delay: 3000,
 				}}
+				ref={sliderRef}
 				loop
 				grabCursor
 				centeredSlides
@@ -40,9 +63,9 @@ const SkillSlider = ({
 				}}
 				modules={[Autoplay]}
 			>
-				{skills.map((skill, i) => {
+				{Object.values(SKILLS).map((skill, i) => {
 					const isActive = i === currentSlide;
-					const hsl = hexToHSL(skill.standaloneColor);
+					const hsl = hexToHSL(skill.color);
 					return (
 						<SwiperSlide
 							className="flex justify-center gap-2 h-28 pt-8 relative"

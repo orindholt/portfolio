@@ -9,10 +9,12 @@ import {
 type Social = keyof typeof SOCIALS;
 
 interface SocialListProps extends React.HTMLAttributes<HTMLUListElement> {
-	socials: Social[];
+	socials?: Array<Social>;
 }
 
-const SocialList = ({ socials }: SocialListProps) => {
+const defaultSocials = Object.keys(SOCIALS) as Array<Social>;
+
+const SocialList = ({ socials = defaultSocials }: SocialListProps) => {
 	return (
 		<ul className="flex gap-4" aria-label="Socials">
 			{socials.map(social => (

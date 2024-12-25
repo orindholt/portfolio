@@ -1,37 +1,41 @@
 "use client";
 
-import { EXPERIENCE } from "@/lib/constants";
-import { useState } from "react";
+import { EXPERIENCE, ITEM_SLICE_INDEX } from "@/lib/constants";
+import { useMemo, useState } from "react";
 import Expander from "../animation/expander";
 import Button from "../button";
 import Heading from "../heading";
 import Experience from "./experience";
 
-const SLICE_INDEX = 3;
-
 const ExperienceSection = () => {
 	const [isExpanded, setIsExpanded] = useState(false);
 
-	const sorted = EXPERIENCE.toSorted((a, b) => {
-		if (a.startDate > b.startDate) return -1;
-		if (a.startDate < b.startDate) return 1;
-		return 0;
-	});
+	const sorted = useMemo(
+		() =>
+			EXPERIENCE.toSorted((a, b) => {
+				if (a.startDate > b.startDate) return -1;
+				if (a.startDate < b.startDate) return 1;
+				return 0;
+			}),
+		[]
+	);
 
 	return (
-		<section className="flex flex-col gap-8 py-8">
-			<Heading>Experience</Heading>
+		<section className="flex flex-col py-8">
+			<Heading className="mb-8">Experience</Heading>
 			<ul className="space-y-8">
-				{sorted.slice(0, SLICE_INDEX).map(experience => (
+				{sorted.slice(0, ITEM_SLICE_INDEX).map(experience => (
 					<Experience key={experience.title} {...experience} />
 				))}
-				<Expander className="space-y-8" expanded={isExpanded}>
-					{sorted.slice(SLICE_INDEX).map(experience => (
+			</ul>
+			<Expander expanded={isExpanded}>
+				<ul className="space-y-8 mt-8">
+					{sorted.slice(ITEM_SLICE_INDEX).map(experience => (
 						<Experience key={experience.title} {...experience} />
 					))}
-				</Expander>
-			</ul>
-			{sorted.length > SLICE_INDEX && (
+				</ul>
+			</Expander>
+			{sorted.length > ITEM_SLICE_INDEX && (
 				<Button
 					className="mx-auto"
 					onClick={() => setIsExpanded(prev => !prev)}

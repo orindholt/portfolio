@@ -4,10 +4,8 @@ export type Svg = {
 };
 
 export interface Skill {
-	name?: string;
-	logoColor: string | string[];
-	standaloneColor: string;
-	textColor?: string;
+	name: string;
+	color: string;
 	svg: Svg;
 }
 

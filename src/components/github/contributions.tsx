@@ -128,26 +128,14 @@ const Contributions = async () => {
 							direction: "ltr",
 						}}
 					>
-						{days.map(({ contributionCount: count, date }, index) => {
-							const level =
-								count >= 20
-									? 4
-									: count >= 14
-									? 3
-									: count >= 7
-									? 2
-									: count > 0
-									? 1
-									: 0;
-							const isToday =
-								new Date(date).toDateString() === new Date().toDateString();
+						{days.map(({ contributionCount: count }, index) => {
+							const level = getContributionLevel(count);
 							return (
 								<div
 									key={index}
 									className="size-4 sm:rounded-sm"
 									data-count={count}
 									data-level={level}
-									data-active={isToday}
 								/>
 							);
 						})}
@@ -161,5 +149,13 @@ const Contributions = async () => {
 		return null;
 	}
 };
+
+function getContributionLevel(count: number) {
+	if (count >= 20) return 4;
+	if (count >= 14) return 3;
+	if (count >= 7) return 2;
+	if (count > 0) return 1;
+	return 0;
+}
 
 export default Contributions;
