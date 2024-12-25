@@ -181,7 +181,7 @@ export const PROJECTS: ReadonlyArray<Project> = [
 		slug: "portfolio",
 		description:
 			"This very portfolio site. A simple, clean and fast codebase built with Svelte 5. It's constantly evolving and growing as I learn new concepts and get new ideas.",
-		repo: "https://github.com/orindholt/portfolio-svelte",
+		repo: "https://github.com/orindholt/portfolio",
 		tags: [SKILLS.typescript, SKILLS.nextjs, SKILLS.tailwind],
 		startDate: new Date("2023-11-23"),
 	},
