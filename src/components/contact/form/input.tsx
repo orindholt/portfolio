@@ -28,7 +28,7 @@ const Input = ({ name, label, className, ...props }: InputProps) => {
 		<div className={cn("space-y-1 text-left", className)}>
 			{label && <Label htmlFor={name}>{label}</Label>}
 			<input
-				className="block bg-transparent border border-white/10 rounded-md px-3.5 py-2 placeholder:text-muted focus-visible:border-primary-500 !outline-none font-normal transition-colors w-full"
+				className="block bg-transparent border border-gray-500 rounded-md px-[1em] py-[0.6em] placeholder:text-muted focus-visible:border-primary-500 !outline-none font-normal transition-colors w-full"
 				onBlur={handleBlur}
 				onChange={handleChange}
 				{...methods}

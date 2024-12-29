@@ -90,3 +90,7 @@ export function getCSSVariableValue(name: string, fallback?: string): string {
 function remToPx(rem: number) {
 	return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
+
+export function randomInRange(min: number, max: number) {
+	return Math.random() * (max - min) + min;
+}

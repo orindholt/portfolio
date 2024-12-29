@@ -1,7 +1,7 @@
 "use client";
 
 import { sendVerifiedContactEmail } from "@/app/actions";
-import { generateRecaptchaToken } from "@/lib/utils";
+import { generateRecaptchaToken, randomInRange } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import confetti from "canvas-confetti";
 import { FormProvider, useForm } from "react-hook-form";
@@ -24,35 +24,60 @@ const contactSchema = z.object({
 
 export type ContactSchema = z.infer<typeof contactSchema>;
 
+const defaultValues: ContactSchema = {
+	name: "",
+	email: "",
+	message: "",
+};
+
 const ContactForm = () => {
 	const methods = useForm<ContactSchema>({
 		resolver: zodResolver(contactSchema),
-		defaultValues: {
-			name: "",
-			email: "",
-			message: "",
-		},
+		defaultValues,
 	});
 
 	async function onSubmit(data: ContactSchema) {
-		console.log(data);
-		confetti({
-			particleCount: 100,
-			spread: 70,
-			origin: { y: 0.6 },
-		});
-		return;
 		const action = "submit";
 		const token = await generateRecaptchaToken(action);
 		const info = await sendVerifiedContactEmail({ token, action, data });
+
 		console.log(info);
+
+		if (!info) return;
+
+		const duration = 5 * 1000;
+		const animationEnd = Date.now() + duration;
+		const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+		const interval = setInterval(function () {
+			const timeLeft = animationEnd - Date.now();
+
+			if (timeLeft <= 0) {
+				return clearInterval(interval);
+			}
+
+			const particleCount = 50 * (timeLeft / duration);
+			// since particles fall down, start a bit higher than random
+			confetti({
+				...defaults,
+				particleCount,
+				origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+			});
+			confetti({
+				...defaults,
+				particleCount,
+				origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+			});
+		}, 250);
+
+		methods.reset(defaultValues);
 	}
 
 	return (
 		<FormProvider {...methods}>
 			<form
 				onSubmit={methods.handleSubmit(onSubmit)}
-				className="grid grid-cols-2 gap-4 bg-gradient-to-br from-gray-950 to-gray-900 p-4 rounded-md border border-gray-800"
+				className="grid grid-cols-2 gap-x-4 gap-y-6 bg-gradient-to-br from-gray-950 to-gray-900 p-4 border border-gray-800 rounded-md"
 			>
 				<Input name="name" label="Name" placeholder="Your superb name" />
 				<Input

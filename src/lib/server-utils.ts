@@ -1,7 +1,6 @@
 "server only";
 
 import { ContactSchema } from "@/components/contact/contact-form";
-import nodemailer from "nodemailer";
 import { CONTACT_EMAIL, RECAPTCHA_SITE_KEY } from "./constants";
 
 interface CreateAssesmentParams {
@@ -97,20 +96,38 @@ export async function createAndVerifyAssesment({
 	return true;
 }
 
-export async function sendContactEmail(data: ContactSchema) {
-	const transporter = nodemailer.createTransport({
-		host: "smtp.gmail.com",
-		port: 587,
-		auth: {
-			user: process.env.ETHEREAL_EMAIL_USER,
-			pass: process.env.ETHEREAL_EMAIL_PASS,
+export async function sendContactEmail({
+	email,
+	name,
+	message,
+}: ContactSchema) {
+	const apiKey = process.env.MAILGUN_API_KEY!;
+	const domainName = process.env.MAILGUN_DOMAIN_NAME!;
+
+	const formData = new FormData();
+
+	formData.append("from", `${name} <mailgun@${domainName}>`);
+	formData.append("to", CONTACT_EMAIL);
+	formData.append("subject", `New message from ${email}`);
+	formData.append("text", message);
+
+	const userPass = `api:${apiKey}`;
+	const authBuffer = Buffer.from(userPass).toString("base64");
+
+	const url = new URL(`https://api.eu.mailgun.net/v3/${domainName}/messages`);
+
+	const response = await fetch(url, {
+		method: "POST",
+		headers: {
+			Authorization: `Basic ${authBuffer}`,
 		},
+		body: formData,
 	});
 
-	return transporter.sendMail({
-		from: `Website Contact Form <${process.env.ETHEREAL_EMAIL_USER}>`,
-		to: CONTACT_EMAIL,
-		subject: `New message from ${data.name} (${data.email})`,
-		text: data.message,
-	});
+	if (!response.ok) {
+		console.error(`${response.status}: ${response.statusText}`);
+		return false;
+	}
+
+	return true;
 }

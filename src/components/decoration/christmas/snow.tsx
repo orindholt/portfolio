@@ -4,6 +4,7 @@ import {
 	Decorations,
 	useDecoration,
 } from "@/components/providers/decoration-provider";
+import { randomInRange } from "@/lib/utils";
 import confetti, { CreateTypes } from "canvas-confetti";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -92,9 +93,5 @@ const Snow = ({
 		root
 	);
 };
-
-function randomInRange(min: number, max: number) {
-	return Math.random() * (max - min) + min;
-}
 
 export default Snow;

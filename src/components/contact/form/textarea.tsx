@@ -28,7 +28,7 @@ const Textarea = ({ name, label, className, ...props }: TextareaProps) => {
 		<div className={cn("space-y-1 text-left", className)}>
 			{label && <Label htmlFor={name}>{label}</Label>}
 			<textarea
-				className="block bg-transparent border border-white/10 rounded-md h-32 px-3.5 py-2 placeholder:text-muted focus-visible:border-primary-500 !outline-none font-normal transition-colors w-full resize-none"
+				className="block bg-transparent border border-gray-500 rounded-md h-32 px-[1em] py-[0.6em] placeholder:text-muted focus-visible:border-primary-500 !outline-none font-normal transition-colors w-full resize-none"
 				onBlur={handleBlur}
 				onChange={handleChange}
 				{...methods}
