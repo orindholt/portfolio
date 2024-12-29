@@ -3,7 +3,7 @@ import SocialList from "./social-list";
 
 const Footer = () => {
 	return (
-		<footer className="py-8 flex flex-wrap gap-4 justify-between items-center border-t border-gray-800">
+		<footer className="py-8 flex flex-wrap gap-x-8 gap-y-4 justify-center md:justify-between items-center border-t border-gray-800">
 			<SocialList />
 			<a
 				className="lg:hover:underline lg:hover:text-primary-500"

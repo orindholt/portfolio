@@ -86,7 +86,7 @@ const ContactForm = () => {
 		<FormProvider {...methods}>
 			<form
 				onSubmit={methods.handleSubmit(onSubmit)}
-				className="grid grid-cols-2 gap-x-4 gap-y-6 bg-gradient-to-br from-gray-950 to-gray-900 p-4 border border-gray-800 rounded-md"
+				className="grid max-md:grid-flow-row md:grid-cols-2 gap-x-4 gap-y-6 bg-gradient-to-br from-gray-950 to-gray-900 p-4 border border-gray-800 rounded-md"
 			>
 				<Input name="name" label="Name" placeholder="Your superb name" />
 				<Input
