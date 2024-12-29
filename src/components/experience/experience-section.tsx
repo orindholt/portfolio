@@ -1,6 +1,7 @@
 "use client";
 
-import { EXPERIENCE, ITEM_SLICE_INDEX } from "@/lib/constants";
+import { ITEM_SLICE_INDEX } from "@/lib/constants";
+import { EXPERIENCES } from "@/lib/data";
 import { useMemo, useState } from "react";
 import Expander from "../animation/expander";
 import Button from "../button";
@@ -12,7 +13,7 @@ const ExperienceSection = () => {
 
 	const sorted = useMemo(
 		() =>
-			EXPERIENCE.toSorted((a, b) => {
+			EXPERIENCES.toSorted((a, b) => {
 				if (a.startDate > b.startDate) return -1;
 				if (a.startDate < b.startDate) return 1;
 				return 0;

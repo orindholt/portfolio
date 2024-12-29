@@ -1,6 +1,6 @@
 "use client";
 
-import { SKILLS } from "@/lib/constants";
+import { SKILLS } from "@/lib/data";
 import { cn, hexToHSL } from "@/lib/utils";
 import { Fragment } from "react";
 import Carousel, { CarouselProps } from "../carousel";

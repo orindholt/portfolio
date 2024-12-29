@@ -1,6 +1,7 @@
 "use client";
 
-import { ITEM_SLICE_INDEX, PROJECTS } from "@/lib/constants";
+import { ITEM_SLICE_INDEX } from "@/lib/constants";
+import { PROJECTS } from "@/lib/data";
 import { useMemo, useState } from "react";
 import Expander from "../animation/expander";
 import Button from "../button";
