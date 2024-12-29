@@ -50,6 +50,10 @@
 	--navbar-height: 5rem;
 }
 
+.grecaptcha-badge {
+	visibility: hidden;
+}
+
 @layer base {
 	* {
 		@apply transition-[background-color] duration-300 ease-in-out;

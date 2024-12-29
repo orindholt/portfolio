@@ -94,3 +94,11 @@ function remToPx(rem: number) {
 export function randomInRange(min: number, max: number) {
 	return Math.random() * (max - min) + min;
 }
+
+export function wait(duration: number) {
+	return new Promise<void>(resolve => {
+		setTimeout(() => {
+			resolve();
+		}, duration);
+	});
+}
