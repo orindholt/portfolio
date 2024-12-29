@@ -3,7 +3,7 @@ import SkillSlider from "./skill-slider";
 
 const AboutSection = () => {
 	return (
-		<Section title="About">
+		<Section title="About" id="about">
 			<div className="space-y-4">
 				<h3 className="font-bold text-4xl normal-case">
 					<span className="inline-block animate-wave origin-bottom-right will-change-transform relative -top-1">

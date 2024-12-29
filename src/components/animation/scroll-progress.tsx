@@ -12,7 +12,7 @@ const ScrollProgress = () => {
 
 	return (
 		<motion.div
-			className="h-1 bg-gradient-to-r from-primary-600 to-primary-500 bg-fixed fixed top-0 inset-x-0 z-10 origin-left"
+			className="h-1 bg-gradient-to-r from-primary-600 to-primary-500 bg-fixed fixed top-0 inset-x-0 z-50 origin-left"
 			style={{
 				scaleX: smoothProgress,
 				filter: "drop-shadow(0 0 0.5rem hsla(var(--primary-500), 0.5))",

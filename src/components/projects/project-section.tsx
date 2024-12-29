@@ -22,7 +22,7 @@ const ProjectSection = () => {
 	);
 
 	return (
-		<Section title="Projects">
+		<Section title="Projects" id="projects">
 			<ul className="space-y-8">
 				{sorted.slice(0, ITEM_SLICE_INDEX).map((project, i) => (
 					<Project as="li" key={project.title} index={i} {...project} />
@@ -31,7 +31,11 @@ const ProjectSection = () => {
 			<Expander expanded={isExpanded}>
 				<ul className="space-y-8 mt-8">
 					{sorted.slice(ITEM_SLICE_INDEX).map((project, i) => (
-						<Project key={project.title} index={i} {...project} />
+						<Project
+							key={project.title}
+							index={i + ITEM_SLICE_INDEX}
+							{...project}
+						/>
 					))}
 				</ul>
 			</Expander>

@@ -84,7 +84,7 @@ const Snow = ({
 		<canvas
 			aria-hidden
 			ref={canvasRef}
-			className="fixed inset-0 z-50 size-full opacity-10 pointer-events-none"
+			className="fixed inset-0 z-40 size-full opacity-10 pointer-events-none"
 			style={{
 				display: isActive ? "block" : "none",
 			}}

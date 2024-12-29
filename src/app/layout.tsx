@@ -1,9 +1,10 @@
 import ScrollProgress from "@/components/animation/scroll-progress";
+import Container from "@/components/container";
 import Footer from "@/components/footer";
-import { RECAPTCHA_SITE_KEY } from "@/lib/constants";
+import Navigation from "@/components/navigation";
+import DecorationProvider from "@/components/providers/decoration-provider";
 import type { Metadata } from "next";
 import { Unbounded } from "next/font/google";
-import Script from "next/script";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "./globals.css";
@@ -15,7 +16,7 @@ const unbounded = Unbounded({
 
 export const metadata: Metadata = {
 	title: "Oliver Rindholt",
-	description: "Oliver Rindholt's personal website",
+	description: "A fullstack web developer based in Copenhagen",
 };
 
 export default function RootLayout({
@@ -26,20 +27,14 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${unbounded.className} antialiased`}>
-				<div
-					id="root"
-					className="min-h-screen flex flex-col max-w-screen-md w-full mx-auto px-8"
-				>
+				<div id="root" className="min-h-screen flex flex-col">
 					<ScrollProgress />
-					{children}
-					<Footer />
+					<Navigation />
+					<Container>
+						<DecorationProvider>{children}</DecorationProvider>
+						<Footer />
+					</Container>
 				</div>
-				{RECAPTCHA_SITE_KEY && (
-					<Script
-						src={`https://www.google.com/recaptcha/enterprise.js?render=${RECAPTCHA_SITE_KEY}`}
-						strategy="lazyOnload"
-					/>
-				)}
 			</body>
 		</html>
 	);

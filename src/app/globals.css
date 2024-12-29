@@ -47,6 +47,7 @@
 	--gray-900: 0, 0%, 10%;
 	--gray-950: 0, 0%, 6%;
 	--error: 9, 87%, 45%;
+	--navbar-height: 5rem;
 }
 
 @layer base {
