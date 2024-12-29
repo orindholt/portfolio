@@ -66,7 +66,7 @@ const Snow = ({
 					colors: ["#ffffff"],
 					shapes: ["circle"],
 					gravity: randomInRange(0.4, 0.6),
-					scalar: randomInRange(0.4, 1),
+					scalar: randomInRange(0.2, 0.8),
 					drift: randomInRange(-0.4, 0.4),
 				});
 

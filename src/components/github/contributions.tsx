@@ -1,4 +1,4 @@
-import { Socials } from "@/lib/constants";
+import { SOCIALS } from "@/lib/constants";
 import CountUp from "../animation/count-up";
 
 type APIResponse =
@@ -112,7 +112,7 @@ const Contributions = async () => {
 					</span>
 					<span className="text-gray-300 text-sm">
 						<a
-							href={Socials.GITHUB}
+							href={SOCIALS.GITHUB}
 							target="_blank"
 							className="lg:hover:underline"
 						>

@@ -8,7 +8,7 @@ const AboutSection = () => {
 				<h3 className="font-bold text-4xl normal-case">
 					<span className="inline-block animate-wave origin-bottom-right will-change-transform relative -top-1">
 						👋
-					</span>
+					</span>{" "}
 					Hello!
 				</h3>
 				<p>A fullstack web developer based in Copenhagen</p>

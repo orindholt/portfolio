@@ -40,7 +40,7 @@ const Navigation = () => {
 	}
 
 	return (
-		<nav className="h-[var(--navbar-height)] sticky top-0 inset-x-0 z-40 px-6 flex items-center max-md:justify-end md:bg-gradient-to-b from-black/75 to-transparent">
+		<nav className="h-[var(--navbar-height)] fixed top-0 inset-x-0 z-40 px-6 flex items-center max-md:justify-end md:bg-gradient-to-b from-black/75 to-transparent">
 			<ul
 				className={cn(
 					"flex max-md:flex-col items-center max-md:justify-center max-w-5xl mx-auto max-md:gap-12 flex-1 max-md:fixed max-md:inset-0 max-md:transition-transform max-md:duration-500 max-md:ease-in-out max-md:bg-black max-md:bg-opacity-90 max-md:backdrop-blur-sm md:text-base text-4xl",

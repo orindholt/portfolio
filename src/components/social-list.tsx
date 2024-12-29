@@ -39,13 +39,13 @@ interface SocialIconProps extends React.HTMLAttributes<SVGSVGElement> {
 
 const SocialIcon = ({ social, ...props }: SocialIconProps) => {
 	switch (social) {
-		case "github":
+		case "GITHUB":
 			return <GithubIcon {...props} />;
-		case "linkedin":
+		case "LINKEDIN":
 			return <LinkedinIcon {...props} />;
-		case "twitter":
+		case "TWITTER":
 			return <TwitterIcon {...props} />;
-		case "codepen":
+		case "CODEPEN":
 			return <CodepenIcon {...props} />;
 		default:
 			return null;
