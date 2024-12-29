@@ -39,10 +39,10 @@ const ContactForm = () => {
 		defaultValues,
 	});
 
-	console.log(loading);
-
 	async function onSubmit(data: ContactSchema) {
 		try {
+			setLoading(true);
+
 			const action = "submit";
 			const token = await generateRecaptchaToken(action);
 			const info = await sendVerifiedContactEmail({ token, action, data });
