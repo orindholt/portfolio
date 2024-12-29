@@ -1,7 +1,7 @@
 "use client";
 
 import { LinkProps } from "@/lib/types/shared-types";
-import { cn } from "@/lib/utils";
+import { cn, getCSSVariableValue } from "@/lib/utils";
 import { MenuIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -27,9 +27,14 @@ const Navigation = () => {
 				behavior: "smooth",
 			});
 		} else if (element) {
-			element.scrollIntoView({
+			const navbarHeight = parseFloat(
+				getCSSVariableValue("--navbar-height").replace("px", "")
+			);
+			const offset =
+				element.getBoundingClientRect().top + window.scrollY - navbarHeight;
+			window.scrollTo({
+				top: offset,
 				behavior: "smooth",
-				block: "start",
 			});
 		}
 	}
@@ -82,7 +87,11 @@ const Navigation = () => {
 };
 
 function NavigationSeparator() {
-	return <span className="text-white text-3xl">&#x2022;</span>;
+	return (
+		<span aria-hidden className="text-white text-3xl">
+			&#x2022;
+		</span>
+	);
 }
 
 function NavigationLink({ href, className, children, ...props }: LinkProps) {

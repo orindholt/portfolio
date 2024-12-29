@@ -70,3 +70,23 @@ export async function generateRecaptchaToken(action: string) {
 		});
 	});
 }
+
+export function getCSSVariableValue(name: string, fallback?: string): string {
+	const value = getComputedStyle(document.documentElement)
+		.getPropertyValue(name)
+		.trim();
+
+	if (!value && fallback) {
+		return fallback;
+	}
+
+	if (value.includes("rem")) {
+		return remToPx(parseFloat(value.replace("rem", ""))) + "px";
+	}
+
+	return value;
+}
+
+function remToPx(rem: number) {
+	return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+}

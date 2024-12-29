@@ -9,7 +9,7 @@ const IntroSection = ({
 	return (
 		<div
 			className={cn(
-				"flex flex-col gap-8 justify-center items-center text-center",
+				"flex flex-col gap-8 justify-center items-center text-center md:pb-[var(--navbar-height)]",
 				className
 			)}
 			{...props}

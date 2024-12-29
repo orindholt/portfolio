@@ -34,7 +34,7 @@ function DecorationButton({
 
 	return (
 		<button
-			name="Toggle decoration"
+			aria-label={`Toggle decoration (${decoration})`}
 			onClick={() => toggleDecoration(decoration)}
 			type="button"
 			className={cn(
