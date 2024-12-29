@@ -16,10 +16,11 @@ const defaultSocials = Object.keys(SOCIALS) as Array<Social>;
 
 const SocialList = ({ socials = defaultSocials }: SocialListProps) => {
 	return (
-		<ul className="flex gap-4" aria-label="Socials">
+		<ul className="flex gap-4" aria-label="Social links">
 			{socials.map(social => (
 				<li key={social}>
 					<a
+						aria-label={`Link to my ${social} profile`}
 						target="_blank"
 						href={SOCIALS[social]}
 						className="text-white lg:hover:text-primary-500"

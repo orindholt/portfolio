@@ -11,7 +11,7 @@ const Card = <T extends React.ElementType = "div">({
 	return (
 		<Element
 			className={cn(
-				"bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 text-white rounded-xl p-6 card flex flex-col gap-4",
+				"bg-gradient-to-br from-gray-950 to-gray-900 border border-gray-800 text-white rounded-xl p-6 card flex flex-col gap-4 text-left",
 				className
 			)}
 			{...props}

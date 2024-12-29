@@ -1,6 +1,8 @@
 import { Experience as ExperienceProps } from "@/lib/types/content-types";
 import { DynamicElement } from "@/lib/types/shared-types";
+import { cn } from "@/lib/utils";
 import Card from "../card";
+import SantaHat from "../decoration/christmas/santa-hat";
 
 const Experience = <T extends React.ElementType>({
 	company,
@@ -9,8 +11,12 @@ const Experience = <T extends React.ElementType>({
 	endDate,
 	startDate,
 	title,
+	index,
 	...props
-}: Omit<DynamicElement<T>, "as"> & ExperienceProps) => {
+}: Omit<DynamicElement<T>, "as"> &
+	ExperienceProps & {
+		index: number;
+	}) => {
 	const formatter = new Intl.DateTimeFormat("en-US", {
 		year: "numeric",
 		month: "short",
@@ -20,7 +26,15 @@ const Experience = <T extends React.ElementType>({
 	const formattedEndDate = endDate ? formatter.format(endDate) : "Present";
 
 	return (
-		<Card {...props}>
+		<Card as="li" {...props}>
+			<SantaHat
+				className={cn(
+					"absolute -top-1.5 -translate-y-1/2",
+					index % 2 === 0
+						? "-right-5 rotate-12"
+						: "-left-5 -rotate-12 scale-x-[-1]"
+				)}
+			/>
 			<h3 className="font-semibold normal-case text-base flex sm:items-center gap-x-2 flex-wrap max-sm:flex-col">
 				<span>{title}</span>{" "}
 				<span className="text-gray-500 max-sm:hidden">•</span>{" "}

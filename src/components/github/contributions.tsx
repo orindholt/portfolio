@@ -105,8 +105,8 @@ const Contributions = async () => {
 		}
 
 		return (
-			<div className="relative space-y-4">
-				<h3 className="text-3xl flex flex-col">
+			<section className="relative space-y-4">
+				<h2 className="text-3xl flex flex-col">
 					<span className="font-bold leading-none">
 						<CountUp end={totalContributions} />
 					</span>
@@ -120,7 +120,7 @@ const Contributions = async () => {
 						</a>{" "}
 						Contributions
 					</span>
-				</h3>
+				</h2>
 				<div className="max-w-[min(calc((theme(size.4)+theme(spacing.1))*36-theme(spacing.1)),_calc(100lvw-theme(spacing.4)*2))] overflow-x-auto pb-4 w-full flex flex-row-reverse scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary-500">
 					<div
 						className="grid grid-rows-7 grid-flow-col gap-1"
@@ -141,7 +141,7 @@ const Contributions = async () => {
 						})}
 					</div>
 				</div>
-			</div>
+			</section>
 		);
 	} catch (err) {
 		const error = err as Error;

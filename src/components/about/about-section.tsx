@@ -1,10 +1,9 @@
-import Heading from "../heading";
+import Section from "../section";
 import SkillSlider from "./skill-slider";
 
 const AboutSection = () => {
 	return (
-		<section className="w-full text-center space-y-8 py-8">
-			<Heading>About</Heading>
+		<Section title="About">
 			<div className="space-y-4">
 				<h3 className="font-bold text-4xl normal-case">
 					<span className="inline-block animate-wave origin-bottom-right will-change-transform relative -top-1">
@@ -29,7 +28,7 @@ const AboutSection = () => {
 				</p>
 			</div>
 			<SkillSlider className="py-8" />
-		</section>
+		</Section>
 	);
 };
 

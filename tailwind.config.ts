@@ -38,6 +38,7 @@ export default {
 				900: "hsla(var(--primary-900))",
 				950: "hsla(var(--primary-950))",
 			},
+			error: "hsla(var(--error))",
 			transparent: "transparent",
 			inherit: "inherit",
 			current: "currentColor",
@@ -50,6 +51,7 @@ export default {
 			animation: {
 				wave: "wave 5s ease-in-out infinite",
 				"fade-in": "fade-in 0.75s ease-in-out",
+				"shadow-pulse": "shadow-pulse 1s ease-in-out infinite alternate",
 			},
 			keyframes: {
 				wave: {
@@ -60,6 +62,16 @@ export default {
 				"fade-in": {
 					"0%": { opacity: "0" },
 					"100%": { opacity: "1" },
+				},
+				"shadow-pulse": {
+					"0%": {
+						filter:
+							"drop-shadow(0 0 0.5rem hsla(var(--skill-color, 0, 0%, 100%), 0.1))",
+					},
+					"100%": {
+						filter:
+							"drop-shadow(0 0 0.5rem hsla(var(--skill-color, 0, 0%, 100%), 0.4))",
+					},
 				},
 			},
 			screens: {

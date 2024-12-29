@@ -1,7 +1,9 @@
 import ScrollProgress from "@/components/animation/scroll-progress";
 import Footer from "@/components/footer";
+import { RECAPTCHA_SITE_KEY } from "@/lib/constants";
 import type { Metadata } from "next";
 import { Unbounded } from "next/font/google";
+import Script from "next/script";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "./globals.css";
@@ -32,6 +34,12 @@ export default function RootLayout({
 					{children}
 					<Footer />
 				</div>
+				{RECAPTCHA_SITE_KEY && (
+					<Script
+						src={`https://www.google.com/recaptcha/enterprise.js?render=${RECAPTCHA_SITE_KEY}`}
+						strategy="lazyOnload"
+					/>
+				)}
 			</body>
 		</html>
 	);

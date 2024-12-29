@@ -5,9 +5,11 @@ import {
 	Variants,
 } from "motion/react";
 
-interface ExpanderProps extends HTMLMotionProps<"div"> {
-	expanded: boolean;
-}
+type ExpanderProps<T extends keyof React.ReactHTML = "div"> =
+	HTMLMotionProps<T> & {
+		expanded: boolean;
+		as?: T;
+	};
 
 const variants: Variants = {
 	hidden: { height: 0, opacity: 0, overflow: "hidden" },
@@ -18,12 +20,14 @@ const Expander = ({
 	expanded,
 	children,
 	className,
+	as = "div",
 	...props
 }: ExpanderProps) => {
+	const Element = motion.create(as);
 	return (
 		<AnimatePresence>
 			{expanded && (
-				<motion.div
+				<Element
 					className={className}
 					variants={variants}
 					initial="hidden"
@@ -32,7 +36,7 @@ const Expander = ({
 					{...props}
 				>
 					{children}
-				</motion.div>
+				</Element>
 			)}
 		</AnimatePresence>
 	);

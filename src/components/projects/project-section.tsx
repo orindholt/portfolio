@@ -4,7 +4,7 @@ import { ITEM_SLICE_INDEX, PROJECTS } from "@/lib/constants";
 import { useMemo, useState } from "react";
 import Expander from "../animation/expander";
 import Button from "../button";
-import Heading from "../heading";
+import Section from "../section";
 import Project from "./project";
 
 const ProjectSection = () => {
@@ -22,17 +22,16 @@ const ProjectSection = () => {
 	);
 
 	return (
-		<section className="flex flex-col py-8">
-			<Heading className="mb-8">Projects</Heading>
+		<Section title="Projects">
 			<ul className="space-y-8">
-				{sorted.slice(0, ITEM_SLICE_INDEX).map(project => (
-					<Project as="li" key={project.title} {...project} />
+				{sorted.slice(0, ITEM_SLICE_INDEX).map((project, i) => (
+					<Project as="li" key={project.title} index={i} {...project} />
 				))}
 			</ul>
 			<Expander expanded={isExpanded}>
 				<ul className="space-y-8 mt-8">
-					{sorted.slice(ITEM_SLICE_INDEX).map(project => (
-						<Project key={project.title} {...project} />
+					{sorted.slice(ITEM_SLICE_INDEX).map((project, i) => (
+						<Project key={project.title} index={i} {...project} />
 					))}
 				</ul>
 			</Expander>
@@ -44,7 +43,7 @@ const ProjectSection = () => {
 					{isExpanded ? "Contract" : "Expand"}
 				</Button>
 			)}
-		</section>
+		</Section>
 	);
 };
 

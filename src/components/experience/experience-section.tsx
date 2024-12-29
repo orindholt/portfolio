@@ -4,7 +4,7 @@ import { EXPERIENCE, ITEM_SLICE_INDEX } from "@/lib/constants";
 import { useMemo, useState } from "react";
 import Expander from "../animation/expander";
 import Button from "../button";
-import Heading from "../heading";
+import Section from "../section";
 import Experience from "./experience";
 
 const ExperienceSection = () => {
@@ -21,17 +21,16 @@ const ExperienceSection = () => {
 	);
 
 	return (
-		<section className="flex flex-col py-8">
-			<Heading className="mb-8">Experience</Heading>
+		<Section title="Experience">
 			<ul className="space-y-8">
-				{sorted.slice(0, ITEM_SLICE_INDEX).map(experience => (
-					<Experience key={experience.title} {...experience} />
+				{sorted.slice(0, ITEM_SLICE_INDEX).map((experience, i) => (
+					<Experience key={experience.title} index={i} {...experience} />
 				))}
 			</ul>
 			<Expander expanded={isExpanded}>
 				<ul className="space-y-8 mt-8">
-					{sorted.slice(ITEM_SLICE_INDEX).map(experience => (
-						<Experience key={experience.title} {...experience} />
+					{sorted.slice(ITEM_SLICE_INDEX).map((experience, i) => (
+						<Experience key={experience.title} index={i} {...experience} />
 					))}
 				</ul>
 			</Expander>
@@ -43,7 +42,7 @@ const ExperienceSection = () => {
 					{isExpanded ? "Contract" : "Expand"}
 				</Button>
 			)}
-		</section>
+		</Section>
 	);
 };
 
