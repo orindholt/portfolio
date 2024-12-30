@@ -13,7 +13,11 @@ type ExpanderProps<T extends keyof React.ReactHTML = "div"> =
 
 const variants: Variants = {
 	hidden: { height: 0, opacity: 0, overflow: "hidden" },
-	visible: { height: "auto", opacity: 1, overflow: "visible" },
+	visible: {
+		height: "auto",
+		opacity: 1,
+		transitionEnd: { overflow: "visible" },
+	},
 };
 
 const Expander = ({

@@ -12,6 +12,9 @@ const SkillSlider = (props: Omit<CarouselProps, "children" | "items">) => {
 		<Carousel
 			items={skillArray}
 			autoplay
+			autoplayOptions={{
+				delay: 3500,
+			}}
 			onlyAutoplayInViewport
 			fadeOut
 			{...props}
