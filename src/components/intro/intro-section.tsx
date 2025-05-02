@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import Contributions from "../github/contributions";
 import SocialList from "../social-list";
 
 const IntroSection = ({
@@ -22,7 +21,7 @@ const IntroSection = ({
 					Oliver Rindholt
 				</h1>
 			</div>
-			<Contributions />
+			{/* <Contributions /> */}
 			<SocialList />
 		</div>
 	);
