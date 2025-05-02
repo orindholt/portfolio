@@ -21,7 +21,7 @@ const Navigation = () => {
 		e.preventDefault();
 		setIsOpen(false);
 
-		if (hash === "#top") {
+		if (hash === "#start") {
 			window.scrollTo({
 				top: 0,
 				behavior: "smooth",
@@ -47,27 +47,27 @@ const Navigation = () => {
 					isOpen ? "max-md:translate-x-0" : "max-md:translate-x-full"
 				)}
 			>
-				<NavigationLink onClick={handleNavigation} href="#top">
-					Surface
+				<NavigationLink onClick={handleNavigation} href="/#about">
+					About
 				</NavigationLink>
 				<NavigationSeparator />
-				<NavigationLink onClick={handleNavigation} href="#about">
-					Biography
+				<NavigationLink onClick={handleNavigation} href="/#projects">
+					Projects
 				</NavigationLink>
 				<NavigationLink
 					onClick={handleNavigation}
-					href="#top"
+					href="/#start"
 					className="max-md:hidden !flex-initial"
 					aria-label="Top"
 				>
 					<Logo className="max-md:hidden" width={40} height={40} />
 				</NavigationLink>
-				<NavigationLink onClick={handleNavigation} href="#projects">
-					Projects
+				<NavigationLink onClick={handleNavigation} href="/#experience">
+					Experience
 				</NavigationLink>
 				<NavigationSeparator />
-				<NavigationLink onClick={handleNavigation} href="#experience">
-					Experience
+				<NavigationLink onClick={handleNavigation} href="/#contact">
+					Contact
 				</NavigationLink>
 			</ul>
 			<button

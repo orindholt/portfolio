@@ -12,7 +12,7 @@ const ContactSection = () => {
 					strategy="lazyOnload"
 				/>
 			)}
-			<Section title="Contact">
+			<Section id="contact" title="Contact">
 				<ContactForm />
 			</Section>
 		</>
