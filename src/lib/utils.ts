@@ -1,7 +1,5 @@
 import clsx from "clsx";
 import { twMerge, type ClassNameValue } from "tailwind-merge";
-import { RECAPTCHA_SITE_KEY } from "./constants";
-
 export function cn(...inputs: ClassNameValue[]) {
 	return twMerge(clsx(inputs));
 }
@@ -56,20 +54,6 @@ export function hexToHSL(hex: string): { h: number; s: number; l: number } {
 	};
 }
 
-export async function generateRecaptchaToken(action: string) {
-	return new Promise<string>((resolve, reject) => {
-		grecaptcha.enterprise.ready(async () => {
-			const token = await grecaptcha.enterprise.execute(RECAPTCHA_SITE_KEY, {
-				action,
-			});
-			if (token) {
-				resolve(token);
-			} else {
-				reject(new Error("Failed to generate reCAPTCHA token"));
-			}
-		});
-	});
-}
 
 export function getCSSVariableValue(name: string, fallback?: string): string {
 	const value = getComputedStyle(document.documentElement)

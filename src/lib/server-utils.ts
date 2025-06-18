@@ -1,99 +1,59 @@
 "server only";
 
 import { ContactSchema } from "@/components/contact/contact-form";
-import { CONTACT_EMAIL, RECAPTCHA_SITE_KEY } from "./constants";
+import { CONTACT_EMAIL } from "./constants";
 
-interface CreateAssesmentParams {
+interface TurnstileVerificationParams {
 	token: string;
-	action: string;
 }
 
-interface CreateAssesmentError {
-	code: number;
-	message: string;
-	status: string;
-	details?: Array<{
-		"@type": string;
-		reason: string;
-		domain: string;
-		metadata: {
-			service: string;
-			consumer: string;
-		};
-	}>;
+interface TurnstileVerificationResponse {
+	success: boolean;
+	"error-codes"?: string[];
+	challenge_ts?: string;
+	hostname?: string;
 }
 
-interface CreateAssesmentSuccess {
-	name: string;
-	event: {
-		token: string;
-		siteKey: string;
-		userAgent: string;
-		userIpAddress: string;
-		expectedAction: string;
-		hashedAccountId: string;
-		express: boolean;
-		requestedUri: string;
-		wafTokenAssessment: boolean;
-		ja3: string;
-		headers: Array<unknown>;
-		firewallPolicyEvaluation: boolean;
-		fraudPrevention: string;
-	};
-	riskAnalysis: {
-		score: number;
-		reasons: Array<unknown>;
-		extendedVerdictReasons: Array<unknown>;
-		challenge: string;
-	};
-	tokenProperties: {
-		valid: boolean;
-		invalidReason: string;
-		hostname: string;
-		androidPackageName: string;
-		iosBundleId: string;
-		action: string;
-		createTime: string;
-	};
-}
-
-type CreateAssesmentResponse = CreateAssesmentError | CreateAssesmentSuccess;
-
-export async function createAndVerifyAssesment({
+export async function verifyTurnstileToken({
 	token,
-	action,
-}: CreateAssesmentParams): Promise<boolean> {
-	const projectId = process.env.RECAPTCHA_PROJECT_ID!;
-	const apiKey = process.env.RECAPTCHA_API_KEY!;
+}: TurnstileVerificationParams): Promise<boolean> {
+	const secretKey = process.env.TURNSTILE_SECRET_KEY!;
 
-	const url = `https://recaptchaenterprise.googleapis.com/v1/projects/${projectId}/assessments?key=${apiKey}`;
-
-	const response = await fetch(url, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			event: {
-				token,
-				expectedAction: action,
-				siteKey: RECAPTCHA_SITE_KEY,
-			},
-		}),
-	});
-
-	const data = (await response.json()) as CreateAssesmentResponse;
-
-	if ("code" in data) {
-		console.error(data);
+	if (!secretKey) {
+		console.error("Turnstile secret key not configured");
 		return false;
 	}
 
-	if (data.riskAnalysis.score <= 0.5 || !data.tokenProperties.valid) {
+	const formData = new FormData();
+	formData.append("secret", secretKey);
+	formData.append("response", token);
+
+	try {
+		const response = await fetch(
+			"https://challenges.cloudflare.com/turnstile/v0/siteverify",
+			{
+				method: "POST",
+				body: formData,
+			}
+		);
+
+		if (!response.ok) {
+			console.error("Turnstile verification request failed:", response.status);
+			return false;
+		}
+
+		const data = (await response.json()) as TurnstileVerificationResponse;
+
+		if (!data.success) {
+			console.error("Turnstile verification failed:", data["error-codes"]);
+			return false;
+		}
+
+		return true;
+	} catch (error) {
+		console.error("Error verifying Turnstile token:", error);
 		return false;
 	}
-
-	return true;
 }
 
 export async function sendContactEmail({

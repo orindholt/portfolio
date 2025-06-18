@@ -1,10 +1,12 @@
 "use client";
 
 import { sendVerifiedContactEmail } from "@/app/actions";
-import { generateRecaptchaToken, randomInRange } from "@/lib/utils";
+import { TURNSTILE_SITE_KEY } from "@/lib/constants";
+import { randomInRange } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import confetti from "canvas-confetti";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import Button from "../button";
@@ -31,8 +33,12 @@ const defaultValues: ContactSchema = {
 	message: "",
 };
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
 const ContactForm = () => {
 	const [loading, setLoading] = useState(false);
+	const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+	const turnstileRef = useRef<TurnstileInstance>(null);
 
 	const methods = useForm<ContactSchema>({
 		resolver: zodResolver(contactSchema),
@@ -43,9 +49,15 @@ const ContactForm = () => {
 		try {
 			setLoading(true);
 
-			const action = "submit";
-			const token = await generateRecaptchaToken(action);
-			const info = await sendVerifiedContactEmail({ token, action, data });
+			if (!turnstileToken) {
+				console.error("Turnstile token not available");
+				return;
+			}
+
+			const info = await sendVerifiedContactEmail({
+				token: turnstileToken,
+				data,
+			});
 
 			if (!info) return;
 
@@ -75,6 +87,9 @@ const ContactForm = () => {
 			}, 250);
 
 			methods.reset(defaultValues);
+			// Reset Turnstile
+			turnstileRef.current?.reset();
+			setTurnstileToken(null);
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -100,9 +115,24 @@ const ContactForm = () => {
 					label="Message"
 					placeholder="What do you want me to know?"
 				/>
-				<Button className="col-span-full" loading={loading} type="submit">
+				<Button
+					className="col-span-full"
+					loading={loading}
+					type="submit"
+					disabled={!turnstileToken}
+				>
 					<span>Send</span>
 				</Button>
+				{!isDevelopment && (
+					<Turnstile
+						className="sr-only"
+						ref={turnstileRef}
+						siteKey={TURNSTILE_SITE_KEY}
+						onSuccess={setTurnstileToken}
+						onError={() => setTurnstileToken(null)}
+						onExpire={() => setTurnstileToken(null)}
+					/>
+				)}
 			</form>
 		</FormProvider>
 	);
