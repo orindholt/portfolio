@@ -2,15 +2,17 @@ import type { Experience, Project, Skill } from "./types/content-types";
 
 export const EXPERIENCES: ReadonlyArray<Experience> = [
 	{
+		id: "golfacross",
 		title: "Fullstack Developer",
 		company: "GolfAcross",
 		companyLink: "https://www.golfacross.com",
 		startDate: new Date("2022-11-01"),
-		endDate: new Date("2023-01-01"),
+		endDate: new Date("2024-01-01"),
 		description:
 			"I worked as the lead developer Fullstack developer at GolfAcross. Where I lead the development of a cross-platform application, for golfers to manage their entire golfing experience.",
 	},
 	{
+		id: "3wm",
 		title: "Frontend Developer",
 		company: "3 Wise Monkeys",
 		companyLink: "https://3wm.dk/",
@@ -20,13 +22,24 @@ export const EXPERIENCES: ReadonlyArray<Experience> = [
 			"I worked as a Frontend Developer at 3 Wise Monkeys. I was part of developing multiple projects, including HTML5 banners, webshops and other websites.",
 	},
 	{
+		id: "daxmedia",
 		title: "Development Specialist",
 		company: "DaxMedia",
 		companyLink: "https://daxmedia.eu/",
-		startDate: new Date("2023-02-01"),
+		startDate: new Date("2024-02-01"),
+		endDate: new Date("2025-04-01"),
+		description:
+			"I worked as a Development Specialist where I primarily worked with full-stack e-commerce solutions, before the company transformed into Returnflows",
+	},
+	{
+		id: "returnflows",
+		title: "Fullstack Developer",
+		company: "Returnflows",
+		companyLink: "https://returnflows.com/",
+		startDate: new Date("2025-04-01"),
 		endDate: null,
 		description:
-			"I am currently working as a Development Specialist where I primarily work with full-stack e-commerce solutions.",
+			"I am currently working as a full-stack developer at Returnflows, where I am part of a team that develops a platform for managing returns and exchanges for e-commerce businesses.",
 	},
 ];
 

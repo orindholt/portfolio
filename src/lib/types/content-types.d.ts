@@ -10,6 +10,7 @@ export interface Skill {
 }
 
 export interface Experience {
+	id: string;
 	title: string;
 	company: string;
 	companyLink: string;

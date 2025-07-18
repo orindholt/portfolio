@@ -11,7 +11,7 @@ import Experience from "./experience";
 const ExperienceSection = () => {
 	const [isExpanded, setIsExpanded] = useState(false);
 
-	const sorted = useMemo(
+	const sortedExperiences = useMemo(
 		() =>
 			EXPERIENCES.toSorted((a, b) => {
 				if (a.startDate > b.startDate) return -1;
@@ -24,24 +24,24 @@ const ExperienceSection = () => {
 	return (
 		<Section title="Experience" id="experience">
 			<ul className="space-y-8">
-				{sorted.slice(0, ITEM_SLICE_INDEX).map((experience, i) => (
-					<Experience key={experience.title} index={i} {...experience} />
+				{sortedExperiences.slice(0, ITEM_SLICE_INDEX).map((experience, i) => (
+					<Experience key={experience.id} index={i} {...experience} />
 				))}
 			</ul>
 			<Expander expanded={isExpanded}>
 				<ul className="space-y-8 mt-8">
-					{sorted.slice(ITEM_SLICE_INDEX).map((experience, i) => (
+					{sortedExperiences.slice(ITEM_SLICE_INDEX).map((experience, i) => (
 						<Experience
-							key={experience.title}
+							key={experience.id}
 							index={i + ITEM_SLICE_INDEX}
 							{...experience}
 						/>
 					))}
 				</ul>
 			</Expander>
-			{sorted.length > ITEM_SLICE_INDEX && (
+			{sortedExperiences.length > ITEM_SLICE_INDEX && (
 				<Button
-					className="mx-auto"
+					className="mx-auto mt-8"
 					onClick={() => setIsExpanded(prev => !prev)}
 				>
 					{isExpanded ? "Contract" : "Expand"}
