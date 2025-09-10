@@ -161,15 +161,6 @@ export const PROJECTS: ReadonlyArray<Project> = [
 		startDate: new Date("2022-11-01"),
 	},
 	{
-		title: "Akacia",
-		slug: "akacia",
-		description:
-			"Akacia is a danish modern pop band. I've built their website, and CMS in which band members can create posts, and upload images.",
-		link: "https://www.akaciamusic.com",
-		tags: [SKILLS.typescript, SKILLS.nextjs, SKILLS.tailwind],
-		startDate: new Date("2023-07-22"),
-	},
-	{
 		title: "Cookie Builder",
 		slug: "cookie-builder",
 		description:
@@ -180,12 +171,30 @@ export const PROJECTS: ReadonlyArray<Project> = [
 		startDate: new Date("2024-04-26"),
 	},
 	{
+		title: "Akacia",
+		slug: "akacia",
+		description:
+			"Akacia is a danish modern pop band. I've built their website, and CMS in which band members can create posts, and upload images.",
+		link: "https://www.akaciamusic.com",
+		tags: [SKILLS.typescript, SKILLS.nextjs, SKILLS.tailwind],
+		startDate: new Date("2023-07-22"),
+	},
+	{
 		title: "Portfolio",
 		slug: "portfolio",
 		description:
-			"This very portfolio site. A simple, clean and fast codebase built with Svelte 5. It's constantly evolving and growing as I learn new concepts and get new ideas.",
+			"This very portfolio site. A simple, clean and fast codebase built with Next.js 15. It's constantly evolving and growing as I learn new concepts and get new ideas.",
 		repo: "https://github.com/orindholt/portfolio",
 		tags: [SKILLS.typescript, SKILLS.nextjs, SKILLS.tailwind],
 		startDate: new Date("2023-11-23"),
+	},
+	{
+		title: "Lyneborg",
+		slug: "lyneborg",
+		description:
+			"Lyneborg is the personal portfolio of Mikkel Lyneborg, a Danish musician and composer. The website showcases his work, biography, and contact information.",
+		link: "https://www.mikkellyneborg.com",
+		tags: [SKILLS.typescript, SKILLS.nextjs, SKILLS.tailwind],
+		startDate: new Date("2024-09-16"),
 	},
 ];
