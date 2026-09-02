@@ -27,7 +27,7 @@ const AboutSection = () => {
 					trusted ally, and quick learner.
 				</p>
 			</div>
-			<SkillSlider className="py-8" />
+			<SkillSlider className="mt-6" />
 		</Section>
 	);
 };

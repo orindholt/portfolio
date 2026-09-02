@@ -7,7 +7,7 @@ const Container = ({
 }: React.HTMLAttributes<HTMLDivElement>) => {
 	return (
 		<div
-			className={cn("max-w-screen-md w-full mx-auto px-8", className)}
+			className={cn("max-w-(--breakpoint-md) w-full mx-auto px-8", className)}
 			{...props}
 		>
 			{children}

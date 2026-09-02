@@ -43,7 +43,7 @@ const Project = <T extends React.ElementType>({
 							name && (
 								<Tooltip as="li" aria-label={name} text={name} key={name}>
 									<svg
-										className="fill-white lg:hover:fill-[var(--skill-color)] size-6"
+										className="fill-white lg:hover:fill-(--skill-color) size-6"
 										style={
 											{
 												"--skill-color": color,
