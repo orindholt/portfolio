@@ -1,10 +1,5 @@
 import { SOCIALS } from "@/lib/constants";
-import {
-	CodepenIcon,
-	GithubIcon,
-	LinkedinIcon,
-	TwitterIcon,
-} from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "lucide-react";
 
 type Social = keyof typeof SOCIALS;
 
@@ -43,10 +38,6 @@ const SocialIcon = ({ social, ...props }: SocialIconProps) => {
 			return <GithubIcon {...props} />;
 		case "LINKEDIN":
 			return <LinkedinIcon {...props} />;
-		case "TWITTER":
-			return <TwitterIcon {...props} />;
-		case "CODEPEN":
-			return <CodepenIcon {...props} />;
 		default:
 			return null;
 	}
