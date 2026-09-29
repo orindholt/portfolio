@@ -18,7 +18,7 @@ const SocialList = ({ socials = defaultSocials }: SocialListProps) => {
 						aria-label={`Link to my ${social} profile`}
 						target="_blank"
 						href={SOCIALS[social]}
-						className="text-white lg:hover:text-primary-500"
+						className="text-foreground lg:hover:text-primary-500"
 					>
 						<SocialIcon social={social} />
 					</a>

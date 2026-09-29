@@ -202,6 +202,24 @@
 		--gray-950: 0, 0%, 6%;
 		--error: 9, 87%, 45%;
 		--navbar-height: 5rem;
+		color-scheme: dark;
+	}
+
+	html[data-theme="light"] {
+		--foreground: 0, 0%, 9%;
+		--background: 0, 0%, 100%;
+		--gray-50: 0, 0%, 9%;
+		--gray-100: 0, 0%, 15%;
+		--gray-200: 0, 0%, 24%;
+		--gray-300: 0, 0%, 42%;
+		--gray-400: 0, 0%, 55%;
+		--gray-500: 0, 0%, 64%;
+		--gray-600: 0, 0%, 74%;
+		--gray-700: 0, 0%, 82%;
+		--gray-800: 0, 0%, 88%;
+		--gray-900: 0, 0%, 94%;
+		--gray-950: 0, 0%, 97%;
+		color-scheme: light;
 	}
 
 	.grecaptcha-badge {
@@ -241,5 +259,18 @@
 	}
 	[data-level="4"] {
 		@apply bg-primary-500;
+	}
+
+	[data-theme="light"] [data-level="1"] {
+		@apply bg-primary-200;
+	}
+	[data-theme="light"] [data-level="2"] {
+		@apply bg-primary-300;
+	}
+	[data-theme="light"] [data-level="3"] {
+		@apply bg-primary-400;
+	}
+	[data-theme="light"] [data-level="4"] {
+		@apply bg-primary-600;
 	}
 }

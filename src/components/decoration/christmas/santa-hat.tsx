@@ -6,8 +6,8 @@ import {
 } from "@/components/providers/decoration-provider";
 
 const SantaHat = (props: React.SVGProps<SVGSVGElement>) => {
-	const { decorations } = useDecoration();
-	const isActive = decorations.includes(Decorations.Snow);
+	const { hasDecoration } = useDecoration();
+	const isActive = hasDecoration(Decorations.Snow);
 
 	if (!isActive) return null;
 

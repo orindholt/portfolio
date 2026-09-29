@@ -1,8 +1,6 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import Snow from "../decoration/christmas/snow";
-import DecorationOptions from "../decoration/decoration-options";
 
 export enum Decorations {
 	Snow = "snow",
@@ -11,11 +9,11 @@ export enum Decorations {
 interface DecorationContextProps {
 	decorations: Array<Decorations>;
 	setDecorations: React.Dispatch<React.SetStateAction<Array<Decorations>>>;
+	toggleDecoration: (decoration: Decorations) => void;
+	hasDecoration: (decoration: Decorations) => boolean;
 }
 
-const DecorationContext = createContext<DecorationContextProps>(
-	{} as DecorationContextProps
-);
+const DecorationContext = createContext<DecorationContextProps | null>(null);
 
 const defaultDecorations: Array<Decorations> = [];
 
@@ -29,15 +27,28 @@ const DecorationProvider = ({ children }: { children: React.ReactNode }) => {
 	const [decorations, setDecorations] =
 		useState<Array<Decorations>>(defaultDecorations);
 
+	function toggleDecoration(decoration: Decorations) {
+		setDecorations(decorations => {
+			if (decorations.includes(decoration)) {
+				return decorations.filter(d => d !== decoration);
+			}
+			return [...decorations, decoration];
+		});
+	}
+
+	function hasDecoration(decoration: Decorations) {
+		return decorations.includes(decoration);
+	}
+
 	const contextValue: DecorationContextProps = {
 		decorations,
 		setDecorations,
+		toggleDecoration,
+		hasDecoration,
 	};
 
 	return (
 		<DecorationContext.Provider value={contextValue}>
-			<DecorationOptions />
-			<Snow />
 			{children}
 		</DecorationContext.Provider>
 	);

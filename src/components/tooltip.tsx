@@ -70,9 +70,11 @@ const Tooltip = <T extends React.ElementType = "div">({
 							exit="hidden"
 						>
 							<div className="-translate-x-1/2 -mt-1.5">
-								<div className="bg-background p-2 rounded-md">{text}</div>
+								<div className="bg-gray-950 border border-gray-800 p-2 rounded-md">
+									{text}
+								</div>
 								<svg
-									className="fill-background relative -top-px mx-auto rotate-180"
+									className="fill-gray-950 relative -top-px mx-auto rotate-180"
 									width="20"
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 25.99 14.6"

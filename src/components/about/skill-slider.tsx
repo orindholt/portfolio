@@ -1,7 +1,7 @@
 "use client";
 
 import { SKILLS } from "@/lib/data";
-import { cn, hexToHSL } from "@/lib/utils";
+import { cn, getSkillColor } from "@/lib/utils";
 import Carousel, { CarouselProps } from "../carousel";
 
 const skillArray = Object.values(SKILLS);
@@ -23,7 +23,6 @@ const SkillSlider = ({
 			{...props}
 		>
 			{(item, { isActive }) => {
-				const hsl = hexToHSL(item.color);
 				return (
 					<div className="relative w-fit mx-auto select-none" key={item.name}>
 						<svg
@@ -31,11 +30,11 @@ const SkillSlider = ({
 								"transition-all duration-300 will-change-transform",
 								isActive
 									? "size-14 fill-[hsla(var(--skill-color))] -mt-2.5 animate-shadow-pulse"
-									: "size-10 fill-white",
+									: "size-10 fill-foreground",
 							)}
 							style={
 								{
-									"--skill-color": `${hsl.h}, ${hsl.s}%, ${hsl.l}%`,
+									"--skill-color": getSkillColor(item.color),
 								} as React.CSSProperties
 							}
 							viewBox={item.svg.viewBox}

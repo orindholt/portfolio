@@ -4,7 +4,8 @@ import {
 	Decorations,
 	useDecoration,
 } from "@/components/providers/decoration-provider";
-import { randomInRange } from "@/lib/utils";
+import { Theme, useTheme } from "@/components/providers/theme-provider";
+import { cn, randomInRange } from "@/lib/utils";
 import confetti, { CreateTypes } from "canvas-confetti";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -27,9 +28,16 @@ const Snow = ({
 	const initialRender = useRef(true);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
-	const { decorations } = useDecoration();
+	const { hasDecoration } = useDecoration();
+	const { theme } = useTheme();
 
-	const isActive = decorations.includes(Decorations.Snow);
+	const isActive = hasDecoration(Decorations.Snow);
+
+	const themeRef = useRef(theme);
+
+	useEffect(() => {
+		themeRef.current = theme;
+	}, [theme]);
 
 	useEffect(() => {
 		const canvas = canvasRef.current as HTMLCanvasElementWithConfetti;
@@ -63,7 +71,7 @@ const Snow = ({
 						x: Math.random(),
 						y: Math.random() * skew - 0.2,
 					},
-					colors: ["#ffffff"],
+					colors: [themeRef.current === Theme.Light ? "#334155" : "#ffffff"],
 					shapes: ["circle"],
 					gravity: randomInRange(0.4, 0.6),
 					scalar: randomInRange(0.2, 0.8),
@@ -85,7 +93,10 @@ const Snow = ({
 		<canvas
 			aria-hidden
 			ref={canvasRef}
-			className="fixed inset-0 z-40 size-full opacity-10 pointer-events-none"
+			className={cn(
+				"fixed inset-0 z-40 size-full pointer-events-none",
+				theme === Theme.Light ? "opacity-30" : "opacity-10"
+			)}
 			style={{
 				display: isActive ? "block" : "none",
 			}}
