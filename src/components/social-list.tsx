@@ -1,10 +1,5 @@
 import { SOCIALS } from "@/lib/constants";
-import {
-	CodepenIcon,
-	GithubIcon,
-	LinkedinIcon,
-	TwitterIcon,
-} from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "lucide-react";
 
 type Social = keyof typeof SOCIALS;
 
@@ -23,7 +18,7 @@ const SocialList = ({ socials = defaultSocials }: SocialListProps) => {
 						aria-label={`Link to my ${social} profile`}
 						target="_blank"
 						href={SOCIALS[social]}
-						className="text-white lg:hover:text-primary-500"
+						className="text-foreground lg:hover:text-primary-500"
 					>
 						<SocialIcon social={social} />
 					</a>
@@ -43,10 +38,6 @@ const SocialIcon = ({ social, ...props }: SocialIconProps) => {
 			return <GithubIcon {...props} />;
 		case "LINKEDIN":
 			return <LinkedinIcon {...props} />;
-		case "TWITTER":
-			return <TwitterIcon {...props} />;
-		case "CODEPEN":
-			return <CodepenIcon {...props} />;
 		default:
 			return null;
 	}

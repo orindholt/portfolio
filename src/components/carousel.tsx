@@ -15,7 +15,7 @@ export interface CarouselProps<T = unknown>
 	onlyAutoplayInViewport?: boolean;
 	children: (
 		item: T,
-		props: { isActive: boolean; currentSlide: number; slideIndex: number }
+		props: { isActive: boolean; currentSlide: number; slideIndex: number },
 	) => React.ReactNode;
 }
 
@@ -55,9 +55,10 @@ const Carousel = <T extends unknown>({
 	return (
 		<div
 			ref={containerRef}
-			className={cn("w-full", fadeOut && "fade-out-x", className)}
+			className={cn("size-full", fadeOut && "fade-out-x", className)}
 		>
 			<Swiper
+				className="overflow-visible!"
 				autoplay={{
 					delay: 3000,
 					...autoplayOptions,

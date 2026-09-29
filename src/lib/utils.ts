@@ -55,6 +55,16 @@ export function hexToHSL(hex: string): { h: number; s: number; l: number } {
 }
 
 
+export function getSkillColor(hex: string): string {
+	const { h, s, l } = hexToHSL(hex);
+
+	if (s === 0 && (l >= 95 || l <= 5)) {
+		return "var(--foreground)";
+	}
+
+	return `${h}, ${s}%, ${l}%`;
+}
+
 export function getCSSVariableValue(name: string, fallback?: string): string {
 	const value = getComputedStyle(document.documentElement)
 		.getPropertyValue(name)

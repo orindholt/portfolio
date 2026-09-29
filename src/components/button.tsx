@@ -21,7 +21,7 @@ const Button = ({
 			aria-busy={loading}
 			type={type}
 			className={cn(
-				"bg-gradient-to-br from-primary-600 to-primary-700 active:scale-95 transition-all rounded px-[1em] h-12 relative",
+				"bg-linear-to-br from-primary-600 to-primary-700 text-white active:scale-95 transition-all rounded px-[1em] h-12 relative",
 				loading && "cursor-wait",
 				disabled && "cursor-not-allowed opacity-50",
 				className

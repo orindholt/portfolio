@@ -54,7 +54,7 @@ Custom color system using CSS custom properties:
 
 ### Key Features
 
-- **Contact Form**: Cloudflare Turnstile integration with Mailgun email delivery
+- **Contact Form**: Cloudflare Turnstile integration with Resend email delivery
 - **Seasonal Decorations**: Christmas themes with snow and Santa hat animations
 - **Responsive Design**: Mobile-first approach with custom breakpoints
 - **Performance**: Optimized with Next.js 15 and Turbopack
@@ -62,7 +62,7 @@ Custom color system using CSS custom properties:
 ### External Integrations
 
 - **Cloudflare Turnstile**: Invisible CAPTCHA for spam protection
-- **Mailgun**: Email delivery service
+- **Resend**: Email delivery service
 - **Vercel**: Deployment platform (inferred from README)
 
 ### Data Management
@@ -76,5 +76,5 @@ Portfolio content is statically defined in `src/lib/data.ts`:
 
 - `NEXT_PUBLIC_TURNSTILE_SITE_KEY` - Turnstile public site key
 - `TURNSTILE_SECRET_KEY` - Turnstile secret key
-- `MAILGUN_API_KEY` - Mailgun API key
-- `MAILGUN_DOMAIN_NAME` - Mailgun domain
+- `RESEND_API_KEY` - Resend API key
+- `RESEND_FROM_EMAIL` - Sender address on a Resend-verified domain

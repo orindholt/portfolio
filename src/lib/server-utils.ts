@@ -1,6 +1,7 @@
 "server only";
 
 import { ContactSchema } from "@/components/contact/contact-form";
+import { Resend } from "resend";
 import { CONTACT_EMAIL } from "./constants";
 
 interface TurnstileVerificationParams {
@@ -17,7 +18,7 @@ interface TurnstileVerificationResponse {
 export async function verifyTurnstileToken({
 	token,
 }: TurnstileVerificationParams): Promise<boolean> {
-	const secretKey = process.env.TURNSTILE_SECRET_KEY!;
+	const secretKey = process.env.TURNSTILE_SECRET_KEY;
 
 	if (!secretKey) {
 		console.error("Turnstile secret key not configured");
@@ -34,7 +35,7 @@ export async function verifyTurnstileToken({
 			{
 				method: "POST",
 				body: formData,
-			}
+			},
 		);
 
 		if (!response.ok) {
@@ -61,31 +62,26 @@ export async function sendContactEmail({
 	name,
 	message,
 }: ContactSchema) {
-	const apiKey = process.env.MAILGUN_API_KEY!;
-	const domainName = process.env.MAILGUN_DOMAIN_NAME!;
+	const apiKey = process.env.RESEND_API_KEY;
+	const fromEmail = process.env.RESEND_FROM_EMAIL;
 
-	const formData = new FormData();
+	if (!apiKey || !fromEmail) {
+		console.error("Resend API key or sender email not configured");
+		return false;
+	}
 
-	formData.append("from", `${name} <mailgun@${domainName}>`);
-	formData.append("to", CONTACT_EMAIL);
-	formData.append("subject", `New message from ${email}`);
-	formData.append("text", message);
+	const resend = new Resend(apiKey);
 
-	const userPass = `api:${apiKey}`;
-	const authBuffer = Buffer.from(userPass).toString("base64");
-
-	const url = new URL(`https://api.eu.mailgun.net/v3/${domainName}/messages`);
-
-	const response = await fetch(url, {
-		method: "POST",
-		headers: {
-			Authorization: `Basic ${authBuffer}`,
-		},
-		body: formData,
+	const { error } = await resend.emails.send({
+		from: `${name} <${fromEmail}>`,
+		to: CONTACT_EMAIL,
+		replyTo: email,
+		subject: `New message from ${email}`,
+		text: message,
 	});
 
-	if (!response.ok) {
-		console.error(`${response.status}: ${response.statusText}`);
+	if (error) {
+		console.error(`${error.name}: ${error.message}`);
 		return false;
 	}
 

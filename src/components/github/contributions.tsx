@@ -42,12 +42,12 @@ const Contributions = async () => {
 	const firstDayThisYear = new Date(
 		new Date().getFullYear(),
 		0,
-		1
+		1,
 	).toISOString();
 	const lastDayThisYear = new Date(
 		new Date().getFullYear(),
 		11,
-		31
+		31,
 	).toISOString();
 
 	try {
@@ -121,7 +121,7 @@ const Contributions = async () => {
 						Contributions
 					</span>
 				</h2>
-				<div className="max-w-[min(calc((theme(size.4)+theme(spacing.1))*36-theme(spacing.1)),_calc(100lvw-theme(spacing.4)*2))] overflow-x-auto pb-4 w-full flex flex-row-reverse scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary-500">
+				<div className="max-w-[min(calc((theme(size.4)+(--spacing(1)))*36-(--spacing(1))),calc(100lvw-(--spacing(4))*2))] overflow-x-auto pb-4 w-full flex flex-row-reverse">
 					<div
 						className="grid grid-rows-7 grid-flow-col gap-1"
 						style={{

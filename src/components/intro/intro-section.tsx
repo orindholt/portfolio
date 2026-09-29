@@ -17,7 +17,7 @@ const IntroSection = ({
 				<h2 className="text-xl sm:text-2xl font-extralight text-primary-400">
 					Fullstack Web Developer
 				</h2>
-				<h1 className="text-4xl sm:text-6xl xl:text-7xl font-bold uppercase gap-6 !leading-none">
+				<h1 className="text-4xl sm:text-6xl xl:text-7xl font-bold uppercase gap-6 leading-none!">
 					Oliver Rindholt
 				</h1>
 			</div>

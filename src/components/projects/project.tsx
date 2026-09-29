@@ -1,6 +1,6 @@
 import { Project as ProjectProps } from "@/lib/types/content-types";
 import { DynamicElement } from "@/lib/types/shared-types";
-import { cn } from "@/lib/utils";
+import { cn, getSkillColor } from "@/lib/utils";
 import { Github, SquareArrowOutUpRight } from "lucide-react";
 import Card from "../card";
 import SantaHat from "../decoration/christmas/santa-hat";
@@ -43,10 +43,10 @@ const Project = <T extends React.ElementType>({
 							name && (
 								<Tooltip as="li" aria-label={name} text={name} key={name}>
 									<svg
-										className="fill-white lg:hover:fill-[var(--skill-color)] size-6"
+										className="fill-foreground lg:hover:fill-[hsla(var(--skill-color))] size-6"
 										style={
 											{
-												"--skill-color": color,
+												"--skill-color": getSkillColor(color),
 											} as React.CSSProperties
 										}
 										viewBox={svg.viewBox}
